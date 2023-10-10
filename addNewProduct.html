@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styleForAddNewProduct.css">
+</head>
+<body>
+
+    <div class="mainDiv">
+        <div>
+            <h4>Добавить новый товар</h4>
+            <b>Добавить в:</b>
+            <input type="text" list="listOfPages" class="pageName"> <br>
+            <b>Название:</b>
+            <input type="text" class="productName"> <br>
+            <b>URL изображения:</b>
+            <input type="url" class="productImage"> <br>
+            <b>Цена товара:</b>
+            <input type="text" class="productPrice">
+            <h3>Создать!</h3>
+        </div>
+    </div>
+    <a href="index.html"><-- Вернуться</a>
+    <datalist id="listOfPages">
+        <option value="pants">Штаны</option>
+        <option value="towels">Полотенца</option>
+        <option value="phones">Телефоны</option>
+        <option value="candies">Конфеты</option>
+    </datalist>
+
+    <script>
+        "use strict"
+        const makeButton = document.querySelector("h3");
+        const parentElem = makeButton.parentElement;
+        makeButton.addEventListener("click", function(item){
+            const nekis = JSON.parse(localStorage.getItem("productList"));
+            let checkExsist = 0;
+            for(let item in nekis){
+                for(let prop in nekis[item]){
+                    if(nekis[item][prop].title == parentElem.querySelector(".productName").value){
+                        alert("Такой продукт уже существует!");
+                        checkExsist = 1;
+                        break;
+                    }
+                }
+            }
+            if(checkExsist == 0 && nekis[parentElem.querySelector(".pageName").value]){
+                switch(parentElem.querySelector(".pageName").value){
+                    case "candies":{
+                        nekis.candies.count++;
+                        nekis.candies[`candy${nekis.candies.count}`] = {
+                            title: parentElem.querySelector(".productName").value,
+                            img: parentElem.querySelector(".productImage").value,
+                            price: parentElem.querySelector(".productPrice").value + "$",
+                        }
+                        break;
+                    }
+                    case "phones":{
+                        nekis.phones.count++;
+                        nekis.phones[`phone${nekis.candies.count}`] = {
+                            title: parentElem.querySelector(".productName").value,
+                            img: parentElem.querySelector(".productImage").value,
+                            price: parentElem.querySelector(".productPrice").value + "$",
+                        }
+                        break;
+                    }
+                    case "towels":{
+                        nekis.towels.count++;
+                        nekis.towels[`towel${nekis.candies.count}`] = {
+                            title: parentElem.querySelector(".productName").value,
+                            img: parentElem.querySelector(".productImage").value,
+                            price: parentElem.querySelector(".productPrice").value + "$",
+                        }
+                        break;
+                    }
+                    case "pants":{
+                        nekis.pants.count++;
+                        nekis.pants[`pantie${nekis.candies.count}`] = {
+                            title: parentElem.querySelector(".productName").value,
+                            img: parentElem.querySelector(".productImage").value,
+                            price: parentElem.querySelector(".productPrice").value + "$",
+                        }
+                        break;
+                    }
+                }
+                localStorage.setItem("productList", JSON.stringify(nekis));
+            }
+        })
+    </script>
+
+
+</body>
+</html>

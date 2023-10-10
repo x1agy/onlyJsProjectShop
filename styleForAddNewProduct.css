@@ -1,0 +1,22 @@
+.mainDiv{
+    position: relative;
+}
+.mainDiv div{
+    position: absolute;
+    width: max-content;
+    left: 40%;
+}
+.mainDiv h4{
+    margin-left: 50px;
+}
+.mainDiv input{
+    position: absolute;
+    right: -100px;
+    
+}
+.mainDiv h3{
+    margin-left: 50px;
+    background-color: aliceblue;
+    width: max-content;
+    padding: 5px;
+}
